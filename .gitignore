@@ -1,2 +1,7 @@
-__pycache__
 now
+*.pyc
+.cache
+.pytest_cache
+.tox
+.env
+*.egg-info
