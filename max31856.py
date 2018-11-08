@@ -71,8 +71,11 @@ class Max31856:
 		return self._format(valueFlt,valueHJ,valueCJ)
 
 	def _format(self,valueFlt,valueHJ,valueCJ):
-		jsonFormat = "{{FAULT:{0}\nHJ:{1}\nCJ:{2}\n}}".format(valueFlt,valueHJ,valueCJ)
-		return jsonFormat
+		aa = { }
+		aa["FAULT"] = valueFlt
+		aa["HJ"] = valueHJ
+		aa["CJ"] = valueCJ
+		return aa
 
 	def write_file(filepath,jsonFormat):
 		file = codecs.open(filepath,"w","utf-8")
@@ -81,16 +84,15 @@ class Max31856:
 
 if __name__ == '__main__':
 
-	filepath = '/home/pi/www/garameki/raspberrypi/cgi-bin/max31856.txt'
 
-	spi0 = Max31856()
+	spi0_0 = Max31856()
 	if "reset" in sys.argv:
-		spi0.open()
-		spi0.reset()
-		spi0.close()
+		spi0_0.open()
+		spi0_0.reset()
+		spi0_0.close()
 	else:
-		spi0.open()
-		print(spi0.read())
-		spi0.close()
+		spi0_0.open()
+		print(spi0_0.read())
+		spi0_0.close()
 
 
