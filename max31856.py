@@ -24,8 +24,7 @@ class Max31856:
 			self.spi.max_speed_hz = 1000000	#最大クロック周波数
 
 	def version(self)
-		"""hello"""
-		return "v1.1"
+		return "1.2"
 
 	def close(self):
 		if self.spi is not None:
