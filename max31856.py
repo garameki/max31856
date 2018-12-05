@@ -52,8 +52,8 @@ class Max31856:
 			resp = self.spi.xfer([0x0f,dummy])
 			if (resp[1] & 0xFF) != 0:
 				valueFlt = resp[1]
-				valueHJ = ""
-				valueCJ = ""
+				valueHJ = -10000
+				valueCJ = -10000
 			else:
 
 				valueFlt = resp[1]
