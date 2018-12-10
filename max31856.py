@@ -23,8 +23,9 @@ class Max31856:
 			self.spi.mode = 0x03			#モード3 CPOL:1 CPHA:1 ,Especially CPHA must be 1
 			self.spi.max_speed_hz = 1000000	#最大クロック周波数
 
+	@classmethod
 	def version(self):
-		return "1.4"
+		return "1.5"
 
 	def analyze_fault(self,code):
 		if code:
@@ -120,31 +121,24 @@ class Max31856:
 		file.close()
 
 if __name__ == '__main__':
-
-
 	args = sys.argv;
 	flag = True
-	if len(args) < 3:flag = False
+	if len(args) < 2:flag = False
 	elif len(args) > 4:flag = False
-	elif args[1] != "0" and args[1] != "1":flag = False
+	elif args[1] != "0" and args[1] != "1":
+		if args[1] == "--version":
+			print(Max31856.version())
 	elif args[1] == "0":
 		if args[2] != "0" and args[2] != "1":flag = False
 	elif args[1] == "1":
 		if args[2] != "1" and args[2] != "2":flag = False
-
-	if flag is False:
-		print("Can't open Max31856")
-		print("Max31856 class Usage : python3 max31856.py n1 n2 [reset]")
-		print("n1...SPI NUMBER : 0 or 1")
-		print("n2...CHIP NUMBER")
-		print("                : 0 or 1 if SPI NUMBER is 0")
-		print("                : 1 or 2 if SPI NUMBER is 1")
 	else:
 		spi = Max31856(int(args[1]),int(args[2]))
 		if "reset" in sys.argv:
 			spi.reset()
 			spi.close()
 		else:
+			print("max31856.py version{}".format(Max31856.version()))
 			vals = spi.read()
 			print("Fault {}".format(vals["FAULT"]))
 			print("HJ {}".format(vals["HJ"]))
@@ -152,4 +146,12 @@ if __name__ == '__main__':
 			spi.analyze_fault()
 			spi.close()
 
+	if flag is False:
+		print("max31856.py version{}".format(Max31856.version()))
+		print("Can't open Max31856")
+		print("Max31856 class Usage : python3 max31856.py n1 n2 [reset]")
+		print("n1...SPI NUMBER : 0 or 1")
+		print("n2...CHIP NUMBER")
+		print("                : 0 or 1 if SPI NUMBER is 0")
+		print("                : 1 or 2 if SPI NUMBER is 1")
 
