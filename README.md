@@ -12,3 +12,8 @@ Return value is dictionary type
 	HJ	: Hot-Junction Temperature : This value must be multiplied by 0.0625 to make itself cercius digree  
 	CJ	: Cold-Junction Temperature : This value must be multiplied by 0.015625 to make itself cercius digree   
 }  
+  
+使われている場所  
+================
+	~src/websocket/client-max31856/の中  
+  
